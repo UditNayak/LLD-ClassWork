@@ -1,5 +1,12 @@
 # Serialization and Singleton
-Serialization can break the Singleton pattern by creating a new instance of the class during the deserialization process. To maintain the Singleton property, you can implement the `readResolve` method in your Singleton class. This method is called during deserialization and can be used to return the existing instance of the Singleton.
+
+### What is Serialization?
+- Serialization is the process of **converting an object into a byte stream** so it can be saved to a file, sent over a network, etc.
+- **Deserialization** is the reverse: converting the byte stream back into an object.
+
+### How does it break Singleton?
+- When you **serialize a Singleton object and then deserialize it**, Java creates a new instance during deserialization.
+- This **violates the Singleton property** because now you have **two objects**.
 
 ### Serialization Problem
 
