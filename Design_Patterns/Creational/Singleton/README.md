@@ -75,6 +75,12 @@ Each implementation has its own benefits and drawbacks, which are documented ins
 - **Lazy Initialization** can be useful in scenarios where the cost of creating an instance is high and it may not be needed.
 - Unnecessary use of Lazy, Multithreading is basically Over-Engineering our code. Remember, simplicity is key. Our code should be as simple as possible.
 
+### Conclusion:
+To achieve Singleton behaviour:
+- Use private constructors to prevent instantiation from outside the class.
+- Provide a static method to get the instance, ensuring only one instance is created.
+- Consider using thread-safe approaches for multi-threaded environments.
+
 ### Why EnumSingleton and InnerClassSingleton are Thread-Safe
 
 #### 1. Enum Singleton
@@ -87,7 +93,6 @@ In Java, **enums are inherently thread-safe** because:
 **In short:**  
 The JVM handles synchronization during enum initialization, so `EnumSingleton.INSTANCE` is always a single, thread-safe instance.
 
----
 
 #### 2. Inner Class Singleton (Bill Pugh Pattern)
 This approach uses a **static inner class** to hold the Singleton instance:
@@ -98,7 +103,6 @@ This approach uses a **static inner class** to hold the Singleton instance:
 **Why no synchronization or volatile needed?**  
 Because the JVM ensures that the inner class initialization happens **exactly once**, even in a multi-threaded environment.
 
----
 
 #### Simple Visual
 - **Enum:** Instance created at enum class load time (JVM ensures thread safety).
@@ -106,6 +110,10 @@ Because the JVM ensures that the inner class initialization happens **exactly on
 
 ---
 
+### Key points:
+- For Serialization, use `readResolve()`.
+- For Reflection, check inside constructor and throw an exception.
+- For multithreading, use Thread-Safe Lazy Initialization or Double-Checked Locking with volatile.
 
 ## References
 - [DigitalOcean: Singleton Pattern](https://www.digitalocean.com/community/tutorials/java-singleton-design-pattern-best-practices-examples)
